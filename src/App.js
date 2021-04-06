@@ -9,8 +9,23 @@ import EvenrtPractice2 from './EvenrtPractice2';
 import ValidationSample from './ValidationSample';
 import ScrollBox from './ScrollBox';
 import IterationSample from './IterationSample'
+import LifeCycleSample from './LifeCycle/LifeCycleSample';
+import ErrorBoundary from './LifeCycle/ErrorBoundary';
+
+function getRandomColor() {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
 
 class App extends Component {
+  state = {
+    color: '#000000'
+  }
+
+  handleClick = () => {
+    this.setState({
+      color: getRandomColor()
+    })
+  }
 
   render() {
     const style = {
@@ -22,18 +37,10 @@ class App extends Component {
 
     return (
       <div style={style}>
-        {/* <MyName name="장"></MyName>
-        <MyName></MyName>
-        <MyNameFunc name="func"></MyNameFunc>
-        <br/>
-        <Counter></Counter>
-        <Say></Say>
-        <EventPractice></EventPractice>
-        <EvenrtPractice2></EvenrtPractice2> */}
-        <ValidationSample></ValidationSample>
-        <ScrollBox ref={(ref) => this.ScrollBox = ref}></ScrollBox>
-        <button onClick={() => this.ScrollBox.scrollToBottom()}>맨 밑으로</button>
-        <IterationSample></IterationSample>
+        <button onClick={this.handleClick}>랜덤색상</button>
+        <ErrorBoundary>
+          <LifeCycleSample color={this.state.color}></LifeCycleSample>
+        </ErrorBoundary>
       </div>
     );
   }
