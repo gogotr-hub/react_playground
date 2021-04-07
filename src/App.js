@@ -1,16 +1,10 @@
 import { React, Component } from 'react';
 import './App.css';
-import MyName from './MyName'
-import MyNameFunc from './MyNameFunc'
-import Counter from './Counter'
-import Say from './Say'
-import EventPractice from './EventPractice';
-import EvenrtPractice2 from './EvenrtPractice2';
-import ValidationSample from './ValidationSample';
-import ScrollBox from './ScrollBox';
-import IterationSample from './IterationSample'
+import Counter from './Hook/Counter'
 import LifeCycleSample from './LifeCycle/LifeCycleSample';
 import ErrorBoundary from './LifeCycle/ErrorBoundary';
+import Info from './Hook/Info';
+import InfoUseReducer from './Hook/InfoUseReducer';
 
 function getRandomColor() {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -18,7 +12,8 @@ function getRandomColor() {
 
 class App extends Component {
   state = {
-    color: '#000000'
+    color: '#000000',
+    visible: false
   }
 
   handleClick = () => {
@@ -41,6 +36,12 @@ class App extends Component {
         <ErrorBoundary>
           <LifeCycleSample color={this.state.color}></LifeCycleSample>
         </ErrorBoundary>
+        <Counter></Counter>
+        <hr></hr>
+        {this.state.visible && <Info></Info>}
+        <button onClick={() => { this.setState({ visible: !this.state.visible }) }}>{this.state.visible ? '안보이기' : '보이기'}</button>
+        <hr></hr>
+        <InfoUseReducer></InfoUseReducer>
       </div>
     );
   }

@@ -32,10 +32,10 @@ class LifeCycleSample extends Component {
         console.log('shouldComponentUpdate', nextProps, nextState);
         return nextState.number % 10 !== 4;
     }
-    componentWillMount() {
-        //컴포넌트를 DOM에서 제거할떄
-        console.log('componenetWillMount');
-    }
+    // componentWillMount() {
+    //     //컴포넌트를 DOM에서 제거할떄
+    //     console.log('componenetWillMount');
+    // }
 
     handleClick = () => {
         this.setState({
