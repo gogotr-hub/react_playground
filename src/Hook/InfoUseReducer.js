@@ -18,7 +18,6 @@ const InfoUseReducer = () => {
     const onChange = (e) => {
         dispatch(e.target);
     }
-
     return (
         <div>
             <div>
