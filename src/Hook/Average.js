@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 //useMemo - 함수형 컴포넌트 내부의 연산을 최적화
 // 메모이제이션
 
@@ -12,24 +12,30 @@ const Average = () => {
     const [list, setList] = useState([]);
     const [number, setNumber] = useState('');
 
-    const onChange = (e) => {
-        setNumber(e.target.value);
-    }
+    //컴포넌트 내부에 있을 경우
+    //리렌더링될때 같이 새로 생성됨
+    //useCallback 사용
+    const onChange = useCallback((e)=>{
+        setNumber(e.target.value)
+    },[]);//컴포넌트가 처음 렌더링될때 함수 생성
 
-    const onInsert = (e) => {
+    const onInsert = useCallback((e)=>{
         const nextList = list.concat(parseInt(number));
         setList(nextList);
         setNumber('');
-    }
-    const onDelete = (value) =>{
+    }, [number, list]);//number, list가 변경되었을떄 생성
+
+    const onDelete = useCallback((value) =>{
         const nextList = list.filter((number) => number !== value);
         setList(nextList);
-    }
-    const onKeyPress = (e) => {
-        if (e.key === 'Enter') {
+    },[list])
+
+    const onKeyPress = useCallback((e)=>{
+        if(e.key === 'Enter'){
             onInsert();
         }
-    }
+    },[number]);//number가 변경되었을때 생성
+
     const avg = useMemo(() => getAverage(list), [list]);
 
     return (
