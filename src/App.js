@@ -5,6 +5,7 @@ import LifeCycleSample from './LifeCycle/LifeCycleSample';
 import ErrorBoundary from './LifeCycle/ErrorBoundary';
 import Info from './Hook/Info';
 import InfoUseReducer from './Hook/InfoUseReducer';
+import Average from './Hook/Average';
 
 function getRandomColor() {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -42,6 +43,8 @@ class App extends Component {
         <button onClick={() => { this.setState({ visible: !this.state.visible }) }}>{this.state.visible ? '안보이기' : '보이기'}</button>
         <hr></hr>
         <InfoUseReducer></InfoUseReducer>
+        <hr></hr>
+        <Average></Average>
       </div>
     );
   }
