@@ -7,6 +7,7 @@ import Info from './Hook/Info';
 import InfoUseReducer from './Hook/InfoUseReducer';
 import Average from './Hook/Average';
 import SassComponent from './sass/SassComponent';
+import CSSModule from './CSSModule/CSSModule';
 
 function getRandomColor() {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -48,6 +49,8 @@ class App extends Component {
         <Average></Average>
         <hr></hr>
         <SassComponent></SassComponent>
+        <hr></hr>
+        <CSSModule></CSSModule>
       </div>
     );
   }
