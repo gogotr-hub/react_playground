@@ -1,6 +1,8 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 //useMemo - 함수형 컴포넌트 내부의 연산을 최적화
 // 메모이제이션
+// 변수, 숫자, 문자열 재사용시 -> useMemo
+// 함수 재사용시 -> useCallback
 
 const getAverage = (numbers) => {
     console.log('평균값 계산중...');
@@ -11,6 +13,7 @@ const getAverage = (numbers) => {
 const Average = () => {
     const [list, setList] = useState([]);
     const [number, setNumber] = useState('');
+    const inputEl = useRef(null);
 
     //컴포넌트 내부에 있을 경우
     //리렌더링될때 같이 새로 생성됨
@@ -23,6 +26,10 @@ const Average = () => {
         const nextList = list.concat(parseInt(number));
         setList(nextList);
         setNumber('');
+        inputEl.current.focus();
+        //*************
+        //useRef로 ref를 설정하면 useRef로 만든 객체안에 current 값이 실제 엘리먼트를 가리킴
+        //************ 
     }, [number, list]);//number, list가 변경되었을떄 생성
 
     const onDelete = useCallback((value) =>{
@@ -40,7 +47,7 @@ const Average = () => {
 
     return (
         <div>
-            <input value={number} onChange={onChange} onKeyPress={onKeyPress}></input>
+            <input value={number} onChange={onChange} onKeyPress={onKeyPress} ref={inputEl}></input>
             <button onClick={onInsert}>등록</button>
             <ul>
                 {

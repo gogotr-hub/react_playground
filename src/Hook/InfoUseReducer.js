@@ -1,11 +1,6 @@
 import React, { useReducer } from 'react';
-
-function reducer(state, action) {
-    return {
-        ...state,
-        [action.name]: action.value
-    };
-}
+import './useInputs';
+import useInputs from './useInputs';
 
 const InfoUseReducer = () => {
     //useReducer - 첫번째 파라메터 : 리듀서 함수
@@ -13,16 +8,11 @@ const InfoUseReducer = () => {
     // state : 현재 가리키는 값
     // dispatch : 액션을 발생시키는 함수
     // ** 장점 : 컴포넌트 업데이트 로직을 컴포넌트 밖으로 뺄수 있다는 것! 
-    const [state, dispatch] = useReducer(reducer, {
+    const [state, onChange] = useInputs({
         name: '',
         nickname: ''
     });
-
     const { name, nickname } = state;
-
-    const onChange = (e) => {
-        dispatch(e.target);
-    }
     return (
         <div>
             <div>
